@@ -6,6 +6,7 @@ import os, sys
 import io, re
 import tempfile
 import ctypes
+import time
 
 libc = ctypes.CDLL(None)
 
@@ -28,6 +29,7 @@ def run_benchmark():
     scalar_times = {}
     tuple_times = {}
     for label, _ in funcs:
+        print 'run_benchmark %s' % (label, )
         path = 'TestData/%s/' % (label, )
         dataFiles = os.listdir(path)
         dataFiles.sort()
@@ -36,9 +38,11 @@ def run_benchmark():
         tuple_times[label] = []
 
         for fname in dataFiles:
+            print 'run_benchmark %s %0.02f' % (label, float(fname) / len(dataFiles))
             total_scalar_time = 0
             total_tuple_time = 0
             with open(path + fname, 'r') as f:
+                time.sleep(0.01)
                 data = eval(f.readline())
                 
                 c_stdout = ctypes.c_void_p.in_dll(libc, 'stdout')
@@ -70,7 +74,8 @@ def run_benchmark():
 
                 total_scalar_time += int(scalar_time)
                 total_tuple_time += int(tuple_time)
-        
+                sys.stdout.flush()
+
             scalar_times[label].append(total_scalar_time)
             tuple_times[label].append(total_tuple_time)
 
@@ -80,7 +85,7 @@ if __name__ == '__main__':
     scalar_times, tuple_times = run_benchmark()
     s = 'scalar_times = %s\ntuple_times=%s' % (str(scalar_times), str(tuple_times))
     if len(sys.argv) >= 2:
-        f = open(argv[1],'w+')
+        f = open(sys.argv[1],'w+')
         f.write(s)
         f.close()
     else:

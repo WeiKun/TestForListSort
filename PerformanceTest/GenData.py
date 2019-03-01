@@ -22,7 +22,7 @@ def int_list(n):
     random.seed(n)
     return [int(2**31*random.random() - 2**30) for _ in range(0,n)]
 
-@reg('long')
+#@reg('long')
 def long_list(n):
     random.seed(n)
     return int_list(n) + [2**64]
@@ -32,12 +32,10 @@ def string_list(n):
     random.seed(n)
     return [str(random.random()) for _ in range(0,n)]
 
-'''
-@reg('string')
+#@reg('unicode-string')
 def string_list(n):
     random.seed(n)
     return latin_string_list(n) + ["\uffff"]
-'''
 
 @reg('heterogeneous')
 def heterogeneous_list(n):
@@ -47,6 +45,7 @@ def GenData(iterations, start_size, step, end_size):
     global funcs
 
     for label, func in funcs:
+        print 'GenData for %s' % (label, )
         path = 'TestData/%s' % label
         if not os.path.exists(path):
             os.makedirs(path) 

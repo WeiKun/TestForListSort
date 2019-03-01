@@ -12,7 +12,7 @@ echo $cpath
 #build origin cpython2.7###
 cd $srcpath
 make clean
-./configure --enable-test-list-sort #--enable-optimizations
+./configure --enable-test-list-sort --enable-optimizations
 make -j4
 mv python python_r
 cd $cpath
@@ -25,7 +25,7 @@ ln -s ../cpython2.7/python_r python_r
 #build optimization cpython2.7###
 cd $srcpath
 make clean
-./configure --enable-test-list-sort --enable-list-sort #--enable-optimizations
+./configure --enable-test-list-sort --enable-list-sort --enable-optimizations
 make -j4
 mv python python_o
 cd $cpath
@@ -36,6 +36,7 @@ ln -s ../cpython2.7/python_o python_o
 
 #test
 #Gen Data
+rm -rf TestData/
 python GenData.py
 
-
+sh benchmark.sh
