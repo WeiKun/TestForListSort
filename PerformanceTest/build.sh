@@ -6,8 +6,6 @@ srcpath='../cpython2.7/'
 cpath=`pwd`
 cd $srcpath
 srcpath=`pwd`
-echo $srcpath
-echo $cpath
 
 #build origin cpython2.7###
 cd $srcpath
