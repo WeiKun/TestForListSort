@@ -38,7 +38,7 @@ def run_benchmark():
         tuple_times[label] = []
 
         for fname in dataFiles:
-            print 'run_benchmark %s %0.02f' % (label, float(fname) / len(dataFiles))
+            print 'run_benchmark %s %.1f%%' % (label, float(fname) * 100 / len(dataFiles))
             total_scalar_time = 0
             total_tuple_time = 0
             with open(path + fname, 'r') as f:

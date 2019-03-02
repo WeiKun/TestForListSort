@@ -20,7 +20,18 @@ for label, _ in funcs:
     for OriginTime, OptimizeTime in zip(mark_r.tuple_times[label], mark_o.tuple_times[label]):
         print OptimizeTime, OriginTime, float(OptimizeTime) / OriginTime, 1 - float(OptimizeTime) / OriginTime
         allTuple[label].append(float(OptimizeTime) / OriginTime)
-    
+
+print 'Type :                           factor          improve'
 for label, _ in funcs:
-    print label, ': ', sum(allScalar[label]) / len(allScalar[label]), 1 - sum(allScalar[label]) / len(allScalar[label])
-    print label, ' - tuple: ', sum(allTuple[label]) / len(allTuple[label]), 1 - sum(allTuple[label]) / len(allTuple[label])
+    factor = sum(allScalar[label]) / len(allScalar[label])
+    improve = 1 - factor
+    pre = '%s :' % (label, )
+    pre += ' ' * (32 - len(pre))
+    print '%s %.2f%%          %.2f%%' % (pre, factor * 100, improve * 100)
+
+for label, _ in funcs:
+    factor = sum(allTuple[label]) / len(allTuple[label])
+    improve = 1 - factor
+    pre = 'tuples of %s :' % (label, )
+    pre += ' ' * (32 - len(pre))
+    print '%s %.2f%%          %.2f%%' % (pre, factor * 100, improve * 100)
