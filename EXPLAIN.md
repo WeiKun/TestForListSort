@@ -1,6 +1,6 @@
-# Python List Sort优化
+# bpo-28685的Python List Sort优化
 ## 来源
-在Python中，list的排序时，采用的是归并排序算法（有优化）。不过由于本次优化并不是在排序算法上进行，因此不细表。
+在Python中，list的排序时，采用的是归并排序算法（有优化）。不过由于本次优化并不是在排序算法上进行，不分析。
 
 在实现细节上，显然排序时会不断调用compare函数，以py2.7为例，普通情况下，Python-List在sort时调用的标准函数是PyObject_RichCompareBool
 
@@ -95,7 +95,7 @@ Done:
 
 ## python3的优化
 python3的[bpo-28685更新](https://github.com/python/cpython/commit/1e34da49ef22004ca25c517b3f07c6d25f083ece)中就提供了一种优化方案。其方式很简单，就是提前判断list里的对象是不是同一个类型，如果是就提前准备好compare函数而不调用通用的PyObject_RichCompareBool函数，这样做：
-- 一来可以避免PyObject_RichCompareBool里的判断跟运算
+- 一来可以避免PyObject_RichCompareBool里的获得compare函数之前的判断跟运算，这一部分在每一次比较时都会进行(o(nlogn)次)，遍历一次类型需要的判断不过是n次。
 - 二来可以避免每次判断都先把结果记入一个PyBool变量然后又要在PyObject_RichCompareBool结尾把结果从PyBool变量里取出来。
 
 具体实现是这样的：
@@ -452,5 +452,7 @@ tuples of float             | 26.53%
 tuples of int               | 33.39%
 tuples of string            | 25.31%
 tuples of heterogeneous     | 13.46%
+
+唯一会性能更差的混合列表，由于是用的最差的那种(因为最后一个元素才是其他类型，导致遍历判断在最后一个节点才因为失败而跳出，所以消耗最大)
 
 具体测试流程在[https://github.com/WeiKun/TestForListSort.git](https://github.com/WeiKun/TestForListSort.git)的PerformanceTest的run_test.sh中
