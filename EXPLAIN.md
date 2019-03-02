@@ -255,6 +255,10 @@ tuples of heterogeneous     | 41.5%
 基于最新的python2.7.15来设计移植
 移植后的代码在[https://github.com/WeiKun/cpython2.7.git](https://github.com/WeiKun/cpython2.7.git)
 
+其中configure时加入--enable-list-sort-optimization开启list-sort的优化，--enable-list-sort-test打开性能测试的代码。
+
+分别对应的LIST_SORT_OPTIMIZATION跟TEST_LIST_SORT两个预编译选项。
+
 ### 异同比较
 首先比较python2.7跟python3在list的sort操作中的差异
 1. python2.7的sort可以携带cmp函数而python3的不行
@@ -424,7 +428,7 @@ data = (
 
 ### 性能测试
 1. 首先采用如下的代码段来输出每次sort的指令周期数
---enable-list-sort
+
 ```c
 unsigned start_low, start_high, end_low, end_high;
 __asm__ __volatile__("rdtsc" : "=a" (start_low), "=d" (start_high));
