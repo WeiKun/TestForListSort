@@ -453,6 +453,6 @@ tuples of int               | 33.39%
 tuples of string            | 25.31%
 tuples of heterogeneous     | 13.46%
 
-唯一会性能更差的混合列表，由于是用的最差的那种(因为最后一个元素才是其他类型，导致遍历判断在最后一个节点才因为失败而跳出，所以消耗最大)
+唯一会性能更差的混合列表，由于是用的最差的那种(因为最后一个元素才是其他类型，导致遍历判断在最后一个节点才因为失败而跳出，所以消耗最大)，所以实际上的性能会稍好于测试的。
 
 具体测试流程在[https://github.com/WeiKun/TestForListSort.git](https://github.com/WeiKun/TestForListSort.git)的PerformanceTest的run_test.sh中
