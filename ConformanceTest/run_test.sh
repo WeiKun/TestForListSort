@@ -10,7 +10,7 @@ srcpath=`pwd`
 #build 
 cd $srcpath
 make clean
-./configure --enable-list-sort
+./configure --enable-list-sort-optimization
 make -j4
 cd $cpath
 ln -s ../cpython2.7/python python_s
