@@ -83,7 +83,7 @@ Done:
 }
 
 ```
-可以看到，正常情况下的compare流程：
+可以看到，正常情况下的compare流程(上文代码其实看不出2~5,这部分代码其实在其他函数里)：
 
 1. 先判断两个对象是不是同类型，如果是就尝试使用tp_richcompare或者tp_compare进行compare
 2. 如果1失败，就判断是不是继承关系，如果是就用父类的的tp_richcompare或进行compare
@@ -253,7 +253,7 @@ tuples of heterogeneous     | 41.5%
 ## 对python2.7的移植
 
 基于最新的python2.7.15来设计移植
-移植后的代码在https://github.com/WeiKun/cpython2.7.git
+移植后的代码在[https://github.com/WeiKun/cpython2.7.git](https://github.com/WeiKun/cpython2.7.git)
 
 ### 异同比较
 首先比较python2.7跟python3在list的sort操作中的差异
@@ -403,7 +403,7 @@ struct s_MergeState {
 
 
 ## 测试
-测试代码在https://github.com/WeiKun/TestForListSort.git
+测试代码在[https://github.com/WeiKun/TestForListSort.git](https://github.com/WeiKun/TestForListSort.git)
 
 ### 一致性验证测试
 首先在每一个unsafe_compare函数的返回处加入assert判断是否与PyObject_RichCompareBool结果是否一致，这样方便在实际项目中进行部分验证。
@@ -419,7 +419,7 @@ data = (
 
 ```
 再用新python来进行测试，验证sort之后的数据跟sorted的一致
-具体在https://github.com/WeiKun/TestForListSort.git的ConformanceTest的run_test.sh中
+具体在[https://github.com/WeiKun/TestForListSort.git](https://github.com/WeiKun/TestForListSort.git)的ConformanceTest的run_test.sh中
 
 
 ### 性能测试
@@ -453,4 +453,4 @@ tuples of int               | 33.39%
 tuples of string            | 25.31%
 tuples of heterogeneous     | 13.46%
 
-具体测试流程在https://github.com/WeiKun/TestForListSort.git的PerformanceTest的run_test.sh中
+具体测试流程在[https://github.com/WeiKun/TestForListSort.git](https://github.com/WeiKun/TestForListSort.git)的PerformanceTest的run_test.sh中
