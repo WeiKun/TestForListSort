@@ -2,6 +2,10 @@
 # Author: weikun
 # Created Time: Fri 01 Mar 2019 09:20:10 AM CST
 #
+if [ ! -d "../cpython2.7/" ];then
+    git clone https://github.com/WeiKun/cpython2.7.git
+fi
+
 srcpath='../cpython2.7/'
 cpath=`pwd`
 cd $srcpath
@@ -9,6 +13,7 @@ srcpath=`pwd`
 
 #build origin cpython2.7###
 cd $srcpath
+git pull
 make clean
 ./configure --enable-list-sort-test #--enable-optimizations
 make -j4
