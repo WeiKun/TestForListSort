@@ -26,7 +26,7 @@ def int_list(n):
 def long_list(n):
     random.seed(n)
     #return int_list(n) + [2**64]
-    return [x + 0L for x in int_list(n)]
+    return [x + 2 ** 32 for x in int_list(n)]
 
 @reg('string')
 def string_list(n):

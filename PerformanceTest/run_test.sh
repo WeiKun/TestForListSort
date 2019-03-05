@@ -10,7 +10,7 @@ srcpath=`pwd`
 #build origin cpython2.7###
 cd $srcpath
 make clean
-./configure --enable-list-sort-test --enable-optimizations
+./configure --enable-list-sort-test #--enable-optimizations
 make -j4
 mv python python_r
 cd $cpath
@@ -23,7 +23,7 @@ ln -s ../cpython2.7/python_r python_r
 #build optimization cpython2.7###
 cd $srcpath
 make clean
-./configure --enable-list-sort-test --enable-list-sort-optimization --enable-optimizations
+./configure --enable-list-sort-test --enable-list-sort-optimization #--enable-optimizations
 make -j4
 mv python python_o
 cd $cpath
