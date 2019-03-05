@@ -22,10 +22,11 @@ def int_list(n):
     random.seed(n)
     return [int(2**31*random.random() - 2**30) for _ in range(0,n)]
 
-#@reg('long')
+@reg('long')
 def long_list(n):
     random.seed(n)
-    return int_list(n) + [2**64]
+    #return int_list(n) + [2**64]
+    return [x + 0L for x in int_list(n)]
 
 @reg('string')
 def string_list(n):
