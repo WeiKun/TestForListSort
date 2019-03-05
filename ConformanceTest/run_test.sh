@@ -3,7 +3,7 @@
 # Created Time: Fri 01 Mar 2019 11:45:45 PM CST
 
 if [ ! -d "../cpython2.7/" ];then
-    git clone https://github.com/WeiKun/cpython2.7.git
+    git clone https://github.com/WeiKun/cpython2.7.git ../
 fi
 
 rm python_s
