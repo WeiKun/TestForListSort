@@ -1,0 +1,7 @@
+#
+*.pyc
+cpython2.7/
+python_o
+python_r
+mark_*.py
+*/TestData/
