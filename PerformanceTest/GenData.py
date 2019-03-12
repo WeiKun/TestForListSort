@@ -33,10 +33,10 @@ def string_list(n):
     random.seed(n)
     return [str(random.random()) for _ in range(0,n)]
 
-#@reg('unicode-string')
-def string_list(n):
+@reg('unicode-string')
+def unicode_list(n):
     random.seed(n)
-    return latin_string_list(n) + ["\uffff"]
+    return [u'%d' % (int(random.random() * 1000)) for _ in range(0,n)]
 
 @reg('heterogeneous')
 def heterogeneous_list(n):
